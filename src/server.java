@@ -37,7 +37,7 @@ public class server {
 			KeyStore keyStore = KeyStore.getInstance("JKS");
 			keyStore.load(keystoreIn,keyPassword.toCharArray());
 			
-			KeyManagerFactory kmf = KeyManagerFactory.getInstance("PKIX");
+			KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
 			kmf.init(keyStore, keyPassword.toCharArray());
 			
 			//context

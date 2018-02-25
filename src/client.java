@@ -37,7 +37,7 @@ public class client {
 			keystore.load(keystoreIn,null);
 			
 			String keyPassword = "1234567890";
-			KeyManagerFactory kmf = KeyManagerFactory.getInstance("PKIX");
+			KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
 			kmf.init(keystore, keyPassword.toCharArray());
 			
 			SSLContext context = SSLContext.getInstance("TLSv1.2");
