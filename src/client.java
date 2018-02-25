@@ -33,7 +33,7 @@ public class client {
 			// keystore
 			String keystorePath = clientArgs[2];
 			FileInputStream keystoreIn = new FileInputStream(keystorePath);
-			KeyStore keystore = KeyStore.getInstance("PKCS12");
+			KeyStore keystore = KeyStore.getInstance("JKS");
 			keystore.load(keystoreIn,null);
 			
 			String keyPassword = "1234567890";
