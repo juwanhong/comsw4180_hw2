@@ -71,6 +71,7 @@ public class client {
 			System.out.println("Host not found error.");
 		} catch (IOException e) {
 			System.out.println("IO error - retry.");
+			e.printStackTrace();
 		} catch (KeyStoreException e) {
 			System.out.println("Keystore error - try with new keystore.");
 		} catch (NoSuchAlgorithmException e) {
