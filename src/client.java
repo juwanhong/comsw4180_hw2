@@ -1,6 +1,7 @@
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -13,12 +14,10 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.UnrecoverableKeyException;
-import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 
@@ -30,16 +29,18 @@ public class client {
 			InetAddress serverIP = InetAddress.getByName(clientArgs[4]);
 			int serverPort = Integer.parseInt(clientArgs[5]);
 			
-			// keystore
+			// load keystore of JKS format
+			String keyPassword = "1234567890";
 			String keystorePath = clientArgs[2];
 			FileInputStream keystoreIn = new FileInputStream(keystorePath);
 			KeyStore keystore = KeyStore.getInstance("JKS");
-			keystore.load(keystoreIn,null);
+			keystore.load(keystoreIn,keyPassword.toCharArray());
 			
-			String keyPassword = "1234567890";
+			// initialize key manager factory
 			KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
 			kmf.init(keystore, keyPassword.toCharArray());
 			
+			// initialize context
 			SSLContext context = SSLContext.getInstance("TLSv1.2");
 			context.init(kmf.getKeyManagers(), null, new SecureRandom());
 
@@ -61,27 +62,24 @@ public class client {
 			out.close();
 			clientSocket.close();
 			
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (NumberFormatException e) {
+			System.out.println("IP address or Port number error - retry with correct input format.");
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found - retry with correct path.");
+		}catch (UnknownHostException e) {
+			System.out.println("Host not found error.");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("File read error - recheck key and file paths.");
 		} catch (KeyStoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Keystore error - try with new keystore.");
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("No such algorithm for key pair - retry with different key pair.");
 		} catch (CertificateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Certificate error - retry with new certificate.");
 		} catch (UnrecoverableKeyException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Unrecoverable key error - retry with different key pair.");
 		} catch (KeyManagementException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Key manager error - retry.");
 		}
 		
 	}
