@@ -26,11 +26,11 @@ public class server {
 			String keyPassword = "1234567890";
 			FileInputStream keystoreIn = new FileInputStream(keystorePath);
 			KeyStore keyStore = KeyStore.getInstance("JKS");
-			keyStore.load(keystoreIn,null);
+			keyStore.load(keystoreIn,keyPassword.toCharArray());
 			
 			// initialize keymanagerfactory with SunX509 instance
 			KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
-			kmf.init(keyStore, null);
+			kmf.init(keyStore, keyPassword.toCharArray());
 			
 			// initialize context with TLSv1.2
 			SSLContext sslContext = SSLContext.getInstance("TLSv1.2");

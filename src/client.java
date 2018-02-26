@@ -35,11 +35,11 @@ public class client {
 			String keystorePath = clientArgs[1];
 			FileInputStream keystoreIn = new FileInputStream(keystorePath);
 			KeyStore keystore = KeyStore.getInstance("JKS");
-			keystore.load(keystoreIn,null);
+			keystore.load(keystoreIn,keyPassword.toCharArray());
 			
 			// initialize key manager factory
 			KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
-			kmf.init(keystore, null);
+			kmf.init(keystore, keyPassword.toCharArray());
 			
 			// initialize context
 			SSLContext context = SSLContext.getInstance("TLSv1.2");
