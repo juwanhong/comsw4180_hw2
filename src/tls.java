@@ -2,7 +2,7 @@
 public class tls {
 
 	public static void main(String[] args) {
-		if(args.length != 6 && args.length != 3) {
+		if(args.length != 5 && args.length != 3) {
 			System.out.println("Input error!");
 			System.out.println("Input format: ");
 			System.out.println("    server: java tls -s [port] [key/cert path]");
@@ -28,7 +28,7 @@ public class tls {
 		
 		// start client
 		case "-c":
-			if(args.length == 6) {
+			if(args.length == 5) {
 				client.Client(args);
 			}
 			else {
