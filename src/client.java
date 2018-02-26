@@ -25,13 +25,13 @@ public class client {
 
 	public static void Client(String[] clientArgs) {
 		try {
-			String filePath = clientArgs[3];
-			InetAddress serverIP = InetAddress.getByName(clientArgs[4]);
-			int serverPort = Integer.parseInt(clientArgs[5]);
+			String filePath = clientArgs[2];
+			InetAddress serverIP = InetAddress.getByName(clientArgs[3]);
+			int serverPort = Integer.parseInt(clientArgs[4]);
 			
 			// load keystore of JKS format
 			String keyPassword = "1234567890";
-			String keystorePath = clientArgs[2];
+			String keystorePath = clientArgs[1];
 			FileInputStream keystoreIn = new FileInputStream(keystorePath);
 			KeyStore keystore = KeyStore.getInstance("JKS");
 			keystore.load(keystoreIn,keyPassword.toCharArray());
