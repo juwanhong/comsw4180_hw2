@@ -39,7 +39,8 @@ public class serverThread extends Thread {
 			
 			
 		} catch (IOException e) {
-			System.out.println("File write error - retry.");
+			System.out.println("IO error - retry.");
+			e.printStackTrace();
 		}
 	}
 }
