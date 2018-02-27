@@ -55,7 +55,6 @@ public class server {
 			System.out.println("Keystore file not found - retry with correct path.");
 		} catch (IOException e) {
 			System.out.println("Socket connection error - retry with different port number.");
-			e.printStackTrace();
 		} catch (KeyManagementException e) {
 			System.out.println("Key manager error - retry.");
 		} catch (UnrecoverableKeyException e) {
