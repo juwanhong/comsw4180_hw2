@@ -34,7 +34,7 @@ public class server {
 			
 			// initialize context with TLSv1.2
 			SSLContext sslContext = SSLContext.getInstance("TLSv1.2");
-			sslContext.init(kmf.getKeyManagers(), kmf., null);
+			sslContext.init(kmf.getKeyManagers(), null, null);
 			
 			// instantiate a ssl server socket with the context and port number
 			SSLServerSocket serverSocket = (SSLServerSocket) sslContext.getServerSocketFactory().createServerSocket(portNumber);
